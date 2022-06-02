@@ -12,6 +12,7 @@ jobs:
 
     strategy:
       matrix:
+        go: [ '1.18' ]
         os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     env:
@@ -19,10 +20,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+
+      - name: Setup go
+        uses: actions/setup-go@v3
         with:
-          go-version-file: 'path/to/go.mod'
-      - run: go version
+          go-version: ${{ matrix.go }}
 
       - name: Install dependencies
         run: go mod download
