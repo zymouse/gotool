@@ -11,11 +11,19 @@ package array
 *************************************************************/
 
 // Reverse Any array/slice positions reverse.
-func Reverse[T ~[]E, E any](arr T) T {
+func Reverse[T ~[]E, E any](arr T) {
 	length := len(arr)
 	for i := 0; i < length/2; i++ {
 		j := length - i - 1
 		arr[i], arr[j] = arr[j], arr[i]
 	}
-	return arr
+}
+
+// CopyReverse copy Any array/slice and positions reverse
+func CopyReverse[T ~[]E, E any](arr T) T {
+	var cr = make(T, len(arr))
+	for j, i := 0, len(arr)-1; i >= 0; i, j = i-1, j+1 {
+		cr[j] = arr[i]
+	}
+	return cr
 }

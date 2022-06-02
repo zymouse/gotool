@@ -12,12 +12,14 @@ func TestReverse(t *testing.T) {
 		{"a", "b", "c"},
 		{1, 2, 3},
 		{true, 1},
+		{},
 	}
 
 	predict := [][]any{
 		{"c", "b", "a"},
 		{3, 2, 1},
 		{1, true},
+		{},
 	}
 
 	for i := 0; i < len(value); i++ {
@@ -29,11 +31,23 @@ func TestReverse(t *testing.T) {
 
 func ExampleReverse() {
 	data := []string{"a", "b", "c"}
-	fmt.Println(array.Reverse(data))
+	array.Reverse(data)
+	fmt.Println(data)
 
 	value := []int{1, 2, 3}
-	fmt.Println(array.Reverse(value))
+	array.Reverse(value)
+	fmt.Println(value)
 	// Output:
 	// [c b a]
 	// [3 2 1]
+}
+
+func ExampleCopyReverse() {
+	data := []string{"a", "b", "c"}
+	value := array.CopyReverse(data)
+	fmt.Println(data)
+	fmt.Println(value)
+	// Output:
+	// [a b c]
+	// [c b a]
 }
