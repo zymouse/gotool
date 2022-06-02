@@ -1,10 +1,10 @@
-name: Tests
+name: test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
   build:
@@ -27,7 +27,14 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Install dependencies
-        run: go mod download
+        run: go mod tidy
 
-      - name: Test GoTool
-        run: go test -v ./...
+      - name: Test
+        run: go test -covermode=count -coverprofile="coverprofile.cov"  ./...
+
+      - name: Send coverage
+        env:
+          COVERALLS_TOKEN: ${{ secrets.coveralls }}
+        run: |
+          go get github.com/mattn/goveralls
+          go run github.com/mattn/goveralls -coverprofile=coverprofile.cov -service=github
