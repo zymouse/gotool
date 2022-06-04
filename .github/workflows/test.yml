@@ -39,4 +39,4 @@ jobs:
         env:
           COVERALLS_TOKEN: ${{ secrets.COVERALLS }}
           COVERALLS_PARALLEL: true
-        run: goveralls -coverprofile=covprofile -service=github
+        run: goveralls -debug=true -coverprofile=covprofile -service=github
