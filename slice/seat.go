@@ -4,6 +4,10 @@
 // @Author: ZhangWei
 package slice
 
+import (
+	"math/rand"
+)
+
 // Reverse Any slice positions reverse.
 func Reverse[T ~[]E, E any](arr T) {
 	length := len(arr)
@@ -24,16 +28,31 @@ func CopyReverse[T ~[]E, E any](arr T) T {
 
 // RemoveElement a value from a slice for removing elements.
 // slice is comparable type.
-func RemoveElement[T ~[]E, E comparable](s T, ele E) T {
-	newA := make(T, len(s)-1)
+func RemoveElement[T ~[]E, E comparable](s T, ele E) (t T) {
+	if s == nil || len(s) == 0 {
+		return
+	}
+
+	t = make(T, len(s)-1)
 	index := 0
 
 	for _, element := range s {
 		if element != ele {
-			newA[index] = element
+			t[index] = element
 			index++
 		}
 	}
 
-	return newA
+	return
+}
+
+// GetElementByRandom a value from a slice and random selection.
+func GetElementByRandom[T ~[]E, E any](s T) (e E) {
+	if s == nil || len(s) == 0 {
+		return
+	}
+	length := len(s)
+	index := rand.Intn(length)
+	e = s[index]
+	return
 }
