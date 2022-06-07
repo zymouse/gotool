@@ -97,3 +97,30 @@ func ExampleGetElementByRandom() {
 	// 4
 	// C
 }
+
+func ExampleRemoveDuplicates() {
+	data := []int{1, 1, 2, 3, 4, 5, 5, 1}
+	value := slice.RemoveDuplicates(data)
+	fmt.Println(value)
+	// Output:
+	// [1 2 3 4 5]
+}
+
+func TestRemoveDuplicates(t *testing.T) {
+	data := []int{1, 1, 2, 3, 4, 5, 5, 1}
+	value := slice.RemoveDuplicates(data)
+	assert.Equal(t, value, []int{1, 2, 3, 4, 5})
+}
+
+func BenchmarkRemoveDuplicates(b *testing.B) {
+	s := make([]int64, 10000)
+
+	for i := 0; i < 10000; i++ {
+		s[i] = rand.Int63()
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		slice.RemoveDuplicates(s)
+	}
+}

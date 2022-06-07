@@ -56,3 +56,29 @@ func GetElementByRandom[T ~[]E, E any](s T) (e E) {
 	e = s[index]
 	return
 }
+
+// RemoveDuplicates a fast method for removing duplicates data from a slice.
+func RemoveDuplicates[T ~[]E, E comparable](data T) T {
+	size := len(data)
+
+	// if there are 0 or 1 items, we return the raw slice itself.
+	if size < 2 {
+		return data
+	}
+
+	set := make(map[E]struct{}, size)
+	unique := make(T, 0, size)
+
+	for _, value := range data {
+		// if the value has been set exist, we skip it
+		if _, ok := set[value]; ok {
+			continue
+		}
+
+		// append a unique value
+		unique = append(unique, value)
+		set[value] = struct{}{}
+	}
+
+	return unique
+}
