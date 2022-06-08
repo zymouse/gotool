@@ -15,6 +15,10 @@ func TestToSet(t *testing.T) {
 	num := []int{1, 2, 3, 4}
 	set := slice.ToSet(num)
 	assert.Equal(t, set, map[int]struct{}{1: {}, 2: {}, 3: {}, 4: {}})
+
+	var str []string
+	value := slice.ToSet(str)
+	assert.Equal(t, value, map[string]struct{}(nil))
 }
 
 func ExampleToSet() {

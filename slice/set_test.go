@@ -20,6 +20,10 @@ func TestSetIntersection(t *testing.T) {
 	data = [][]string{{"a", "b", "c"}, {"a", "d"}, {"a", "f"}, {"g"}}
 	set = slice.SetIntersection(data...)
 	assert.Equal(t, set, []string(nil))
+
+	data = [][]string{}
+	set = slice.SetIntersection(data...)
+	assert.Equal(t, set, []string(nil))
 }
 
 func ExampleSetIntersection() {
@@ -34,7 +38,11 @@ func TestContainsAny(t *testing.T) {
 	data := []int{1, 2, 3, 4, 5}
 	flag := slice.ContainsAny(data, 1, 2, 13)
 	assert.Equal(t, flag, true)
+
 	flag = slice.ContainsAny(data, 7, 8, 9)
+	assert.Equal(t, flag, false)
+
+	flag = slice.ContainsAny([]int{}, 7, 8, 9)
 	assert.Equal(t, flag, false)
 }
 
@@ -42,7 +50,11 @@ func TestContainsAll(t *testing.T) {
 	data := []int{1, 2, 3, 4, 5}
 	flag := slice.ContainsAll(data, 1, 2, 3)
 	assert.Equal(t, flag, true)
+
 	flag = slice.ContainsAll(data, 1, 2, 6)
+	assert.Equal(t, flag, false)
+
+	flag = slice.ContainsAll([]int{}, 7, 8, 9)
 	assert.Equal(t, flag, false)
 }
 
@@ -94,4 +106,24 @@ func BenchmarkIn(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		slice.In(s, 121)
 	}
+}
+
+func TestIn(t *testing.T) {
+	data := []int{1, 2, 3, 4, 5}
+	flag := slice.In(data, 1)
+	assert.Equal(t, flag, true)
+	flag = slice.In(data, 6)
+	assert.Equal(t, flag, false)
+}
+
+func ExampleIn() {
+	data := []int{1, 2, 3, 4, 5}
+	flag := slice.In(data, 1)
+	fmt.Println(flag)
+
+	flag = slice.In(data, 6)
+	fmt.Println(flag)
+	// Output:
+	// true
+	// false
 }
