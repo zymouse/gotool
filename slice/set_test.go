@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/jtyoui/gotool/slice"
 	"github.com/stretchr/testify/assert"
+	"math/rand"
 	"testing"
 )
 
@@ -67,4 +68,30 @@ func ExampleContainsAll() {
 	// Output:
 	// false
 	// true
+}
+
+func BenchmarkContainsAll(b *testing.B) {
+	s := make([]int64, 1000)
+
+	for i := 0; i < 1000; i++ {
+		s[i] = rand.Int63()
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		slice.ContainsAll(s, 1, 2, 3)
+	}
+}
+
+func BenchmarkIn(b *testing.B) {
+	s := make([]int64, 1000)
+
+	for i := 0; i < 1000; i++ {
+		s[i] = rand.Int63()
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		slice.In(s, 121)
+	}
 }

@@ -41,6 +41,10 @@ func ContainsAny[T ~[]E, E comparable](data T, elements ...E) (ok bool) {
 	// get set from data slice
 	m := ToSet(data)
 
+	if m == nil {
+		return
+	}
+
 	for _, element := range elements {
 		if _, ok = m[element]; ok {
 			return
@@ -61,5 +65,23 @@ func ContainsAll[T ~[]E, E comparable](data T, elements ...E) (ok bool) {
 		}
 	}
 
+	return
+}
+
+// In an element in the data, will return true. otherwise false.
+//
+// slice.In comparable slice.ContainsAll more fast.
+func In[T ~[]E, E comparable](data T, e E) (ok bool) {
+	// if data are not elements. return nil.
+	if len(data) == 0 {
+		return
+	}
+
+	for _, value := range data {
+		if value == e {
+			ok = true
+			return
+		}
+	}
 	return
 }
