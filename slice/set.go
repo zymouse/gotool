@@ -35,3 +35,31 @@ func SetIntersection[T ~[]E, E comparable](many ...T) (set T) {
 	}
 	return
 }
+
+// ContainsAny there are one element in the data, will return true. otherwise false.
+func ContainsAny[T ~[]E, E comparable](data T, elements ...E) (ok bool) {
+	// get set from data slice
+	m := ToSet(data)
+
+	for _, element := range elements {
+		if _, ok = m[element]; ok {
+			return
+		}
+	}
+
+	return
+}
+
+// ContainsAll all element are in the data, will return true. otherwise false.
+func ContainsAll[T ~[]E, E comparable](data T, elements ...E) (ok bool) {
+	// get set from data slice
+	m := ToSet(data)
+
+	for _, element := range elements {
+		if _, ok = m[element]; !ok {
+			return
+		}
+	}
+
+	return
+}

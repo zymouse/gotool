@@ -28,3 +28,43 @@ func ExampleSetIntersection() {
 	// Output:
 	// [a]
 }
+
+func TestContainsAny(t *testing.T) {
+	data := []int{1, 2, 3, 4, 5}
+	flag := slice.ContainsAny(data, 1, 2, 13)
+	assert.Equal(t, flag, true)
+	flag = slice.ContainsAny(data, 7, 8, 9)
+	assert.Equal(t, flag, false)
+}
+
+func TestContainsAll(t *testing.T) {
+	data := []int{1, 2, 3, 4, 5}
+	flag := slice.ContainsAll(data, 1, 2, 3)
+	assert.Equal(t, flag, true)
+	flag = slice.ContainsAll(data, 1, 2, 6)
+	assert.Equal(t, flag, false)
+}
+
+func ExampleContainsAny() {
+	data := []int{1, 2, 3, 4, 5}
+	flag := slice.ContainsAny(data, 1, 13)
+	fmt.Println(flag)
+
+	flag = slice.ContainsAny(data, 6, 13)
+	fmt.Println(flag)
+	// Output:
+	// true
+	// false
+}
+
+func ExampleContainsAll() {
+	data := []int{1, 2, 3, 4, 5}
+	flag := slice.ContainsAll(data, 1, 13)
+	fmt.Println(flag)
+
+	flag = slice.ContainsAll(data, 1, 2)
+	fmt.Println(flag)
+	// Output:
+	// false
+	// true
+}
