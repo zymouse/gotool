@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/jtyoui/gotool/slice"
 	"github.com/stretchr/testify/assert"
+	"math/rand"
 	"testing"
 )
 
@@ -27,4 +28,17 @@ func ExampleToSet() {
 	fmt.Println(set)
 	// Output:
 	// map[1:{} 2:{} 3:{}]
+}
+
+func BenchmarkToSet(b *testing.B) {
+	num := make([]int64, 10000)
+
+	for i := 0; i < 10000; i++ {
+		num[i] = rand.Int63()
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		slice.ToSet(num)
+	}
 }

@@ -12,17 +12,15 @@ import (
 )
 
 func TestMaxLen(t *testing.T) {
-	s := [][]any{{1, 2, 3}, {"a"}, {true, false}, {}}
+	s := [][]any{{"a"}, {true, false}, {}, {1, 2, 3}}
 	size, data := slice.MaxLen(s...)
 	assert.Equal(t, size, 3)
 	assert.Equal(t, data, []any{1, 2, 3})
-}
 
-func TestMinLen(t *testing.T) {
-	s := [][]any{{1, 2, 3}, {"a"}, {true, false}}
-	size, data := slice.MinLen(s...)
-	assert.Equal(t, size, 1)
-	assert.Equal(t, data, []any{"a"})
+	var i []any
+	size, data = slice.MaxLen(i)
+	assert.Equal(t, size, 0)
+	assert.Equal(t, data, []interface{}(nil))
 }
 
 func ExampleMaxLen() {
@@ -34,6 +32,18 @@ func ExampleMaxLen() {
 	// Output:
 	// 3
 	// [1 2 3]
+}
+
+func TestMinLen(t *testing.T) {
+	s := [][]any{{1, 2, 3}, {"a"}, {true, false}}
+	size, data := slice.MinLen(s...)
+	assert.Equal(t, size, 1)
+	assert.Equal(t, data, []any{"a"})
+
+	var i []any
+	size, data = slice.MinLen(i)
+	assert.Equal(t, size, 0)
+	assert.Equal(t, data, []interface{}(nil))
 }
 
 func ExampleMinLen() {

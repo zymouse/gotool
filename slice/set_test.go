@@ -46,18 +46,6 @@ func TestContainsAny(t *testing.T) {
 	assert.Equal(t, flag, false)
 }
 
-func TestContainsAll(t *testing.T) {
-	data := []int{1, 2, 3, 4, 5}
-	flag := slice.ContainsAll(data, 1, 2, 3)
-	assert.Equal(t, flag, true)
-
-	flag = slice.ContainsAll(data, 1, 2, 6)
-	assert.Equal(t, flag, false)
-
-	flag = slice.ContainsAll([]int{}, 7, 8, 9)
-	assert.Equal(t, flag, false)
-}
-
 func ExampleContainsAny() {
 	data := []int{1, 2, 3, 4, 5}
 	flag := slice.ContainsAny(data, 1, 13)
@@ -68,6 +56,31 @@ func ExampleContainsAny() {
 	// Output:
 	// true
 	// false
+}
+
+func BenchmarkContainsAny(b *testing.B) {
+	s := make([]int64, 10000)
+
+	for i := 0; i < 10000; i++ {
+		s[i] = rand.Int63()
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		slice.ContainsAny(s, rand.Int63(), rand.Int63(), rand.Int63())
+	}
+}
+
+func TestContainsAll(t *testing.T) {
+	data := []int{1, 2, 3, 4, 5}
+	flag := slice.ContainsAll(data, 1, 2, 3)
+	assert.Equal(t, flag, true)
+
+	flag = slice.ContainsAll(data, 1, 2, 6)
+	assert.Equal(t, flag, false)
+
+	flag = slice.ContainsAll([]int{}, 7, 8, 9)
+	assert.Equal(t, flag, false)
 }
 
 func ExampleContainsAll() {
@@ -83,28 +96,15 @@ func ExampleContainsAll() {
 }
 
 func BenchmarkContainsAll(b *testing.B) {
-	s := make([]int64, 1000)
+	s := make([]int64, 10000)
 
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 10000; i++ {
 		s[i] = rand.Int63()
 	}
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		slice.ContainsAll(s, 1, 2, 3)
-	}
-}
-
-func BenchmarkIn(b *testing.B) {
-	s := make([]int64, 1000)
-
-	for i := 0; i < 1000; i++ {
-		s[i] = rand.Int63()
-	}
-
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		slice.In(s, 121)
+		slice.ContainsAll(s, rand.Int63(), rand.Int63(), rand.Int63())
 	}
 }
 
@@ -126,4 +126,17 @@ func ExampleIn() {
 	// Output:
 	// true
 	// false
+}
+
+func BenchmarkIn(b *testing.B) {
+	s := make([]int64, 10000)
+
+	for i := 0; i < 10000; i++ {
+		s[i] = rand.Int63()
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		slice.In(s, rand.Int63())
+	}
 }
