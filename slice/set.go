@@ -12,10 +12,7 @@ func SetIntersection[T ~[]E, E comparable](many ...T) (set T) {
 	}
 
 	// get all slice number.
-	size := 0
-	for _, m := range many {
-		size += len(m)
-	}
+	size := Len(many)
 
 	// all keys and count the number of many
 	manyMap := make(map[E]int, size)
@@ -45,8 +42,8 @@ func ContainsAny[T ~[]E, E comparable](data T, elements ...E) (ok bool) {
 		return
 	}
 
-	for _, element := range elements {
-		if _, ok = m[element]; ok {
+	for i := 0; i < len(elements); i++ {
+		if _, ok = m[elements[i]]; ok {
 			return
 		}
 	}
@@ -59,8 +56,12 @@ func ContainsAll[T ~[]E, E comparable](data T, elements ...E) (ok bool) {
 	// get set from data slice
 	m := ToSet(data)
 
-	for _, element := range elements {
-		if _, ok = m[element]; !ok {
+	if m == nil {
+		return
+	}
+
+	for i := 0; i < len(elements); i++ {
+		if _, ok = m[elements[i]]; !ok {
 			return
 		}
 	}
@@ -72,13 +73,10 @@ func ContainsAll[T ~[]E, E comparable](data T, elements ...E) (ok bool) {
 //
 // slice.In comparable slice.ContainsAll more fast.
 func In[T ~[]E, E comparable](data T, e E) (ok bool) {
-	// if data are not elements. return nil.
-	if len(data) == 0 {
-		return
-	}
+	length := len(data)
 
-	for _, value := range data {
-		if value == e {
+	for i := 0; i < length; i++ {
+		if data[i] == e {
 			ok = true
 			return
 		}

@@ -56,3 +56,21 @@ func ExampleMinLen() {
 	// 1
 	// [a]
 }
+
+func TestLen(t *testing.T) {
+	data := []int{1, 2, 3, 4, 5}
+	s := slice.Len(data)
+	assert.Equal(t, s, len(data))
+
+	other := [][]int{{1, 2}, {4, 5, 6}, {1, 5, 8, 3}}
+	s1 := slice.Len(&other)
+	assert.Equal(t, s1, 9)
+}
+
+func ExampleLen() {
+	other := []any{1, []any{1, 2, 3}, []string{"a", "b"}}
+	s := slice.Len(&other)
+	fmt.Println(s)
+	// Output:
+	// 6
+}
