@@ -29,17 +29,18 @@ func CopyReverse[T ~[]E, E any](arr T) T {
 // RemoveElement a value from a slice for removing elements.
 // slice is comparable type.
 func RemoveElement[T ~[]E, E comparable](s T, ele E) (t T) {
-	if s == nil || len(s) == 0 {
+	length := len(s)
+
+	if s == nil || length == 0 {
 		return
 	}
 
-	t = make(T, len(s)-1)
-	index := 0
+	t = make(T, length-1)
 
-	for _, element := range s {
-		if element != ele {
-			t[index] = element
-			index++
+	for i, j := 0, 0; i < length; i++ {
+		if s[i] != ele {
+			t[j] = s[i]
+			j++
 		}
 	}
 
@@ -55,4 +56,32 @@ func GetElementByRandom[T ~[]E, E any](s T) (e E) {
 	index := rand.Intn(length)
 	e = s[index]
 	return
+}
+
+// RemoveDuplicates a fast method for removing duplicates data from a slice.
+func RemoveDuplicates[T ~[]E, E comparable](data T) T {
+	size := len(data)
+
+	// if there are 0 or 1 items, we return the raw slice itself.
+	if size < 2 {
+		return data
+	}
+
+	set := make(map[E]struct{}, size)
+	unique := make(T, 0, size)
+
+	for i := 0; i < size; i++ {
+		value := data[i]
+
+		// if the value has been set exist, we skip it
+		if _, ok := set[value]; ok {
+			continue
+		}
+
+		// append a unique value
+		unique = append(unique, value)
+		set[value] = struct{}{}
+	}
+
+	return unique
 }
