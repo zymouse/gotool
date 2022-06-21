@@ -74,3 +74,21 @@ func ExampleLen() {
 	// Output:
 	// 6
 }
+
+func TestCloneSlice(t *testing.T) {
+	data := []int{1, 2, 3, 4, 5}
+	s := slice.CloneSlice(data)
+	assert.Equal(t, s, data)
+
+	data[1] = 100
+	assert.Equal(t, s, []int{1, 2, 3, 4, 5})
+	assert.Equal(t, data, []int{1, 100, 3, 4, 5})
+}
+
+func ExampleCloneSlice() {
+	data := []int{1, 2, 3, 4, 5}
+	s := slice.CloneSlice(data)
+	fmt.Println(s)
+	// Output:
+	// [1 2 3 4 5]
+}

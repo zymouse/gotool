@@ -4,7 +4,9 @@
 // @Author: ZhangWei
 package math
 
+import "github.com/jtyoui/gotool/f"
+
 // IsOdd returns true if the n is an odd number,otherwise false.
-func IsOdd[E number](n E) bool {
+func IsOdd[E f.Number](n E) bool {
 	return n&1 == 1
 }

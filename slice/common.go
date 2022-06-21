@@ -73,3 +73,10 @@ func Len(data any) (size int) {
 	size++
 	return
 }
+
+// CloneSlice clone a slice.
+func CloneSlice[T ~[]E, E any](t T) (c T) {
+	c = make(T, len(t))
+	copy(c, t)
+	return
+}
