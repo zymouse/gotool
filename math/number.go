@@ -44,3 +44,12 @@ func Max(numbers ...int) int {
 	}
 	return x
 }
+
+// Abs returns the absolute value of x.
+func Abs[T f.RealNumber](x T) T {
+	if x < 0 {
+		return -x
+	}
+	return x
+	//  x ^ (x >> 31)
+}

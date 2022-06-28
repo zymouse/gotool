@@ -84,3 +84,23 @@ func ExampleMax() {
 	// Output:
 	// 10
 }
+
+func TestAbs(t *testing.T) {
+	assert.Equal(t, math.Abs(1), 1)
+	assert.Equal(t, math.Abs(-1), 1)
+	assert.Equal(t, math.Abs(0), 0)
+}
+
+func BenchmarkAbs(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		math.Abs(-1)
+	}
+}
+
+func ExampleAbs() {
+	fmt.Println(math.Abs(1))
+	fmt.Println(math.Abs(-1))
+	// Output:
+	// 1
+	// 1
+}

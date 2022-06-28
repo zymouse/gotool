@@ -23,3 +23,7 @@ type TypeConvert interface {
 type Number interface {
 	Integer | UInteger
 }
+
+type RealNumber interface {
+	Number | Floats
+}
