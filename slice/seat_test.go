@@ -61,6 +61,17 @@ func TestRemoveElement(t *testing.T) {
 	var elements []string
 	element := slice.RemoveElement(elements, "hello")
 	assert.Equal(t, element, elements)
+
+	num := []int{1, 1, 2, 3}
+	nums := slice.RemoveElement(num, 1)
+	assert.Equal(t, nums, []int{2, 3})
+}
+
+func BenchmarkRemoveElement(b *testing.B) {
+	s := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}
+	for i := 0; i < b.N; i++ {
+		slice.RemoveElement(s, "a")
+	}
 }
 
 func ExampleRemoveElement() {

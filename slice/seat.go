@@ -29,22 +29,7 @@ func CopyReverse[T ~[]E, E any](arr T) T {
 // RemoveElement a value from a slice for removing elements.
 // slice is comparable type.
 func RemoveElement[T ~[]E, E comparable](s T, ele E) (t T) {
-	length := len(s)
-
-	if s == nil || length == 0 {
-		return
-	}
-
-	t = make(T, length-1)
-
-	for i, j := 0, 0; i < length; i++ {
-		if s[i] != ele {
-			t[j] = s[i]
-			j++
-		}
-	}
-
-	return
+	return Remove(s, ele)
 }
 
 // GetElementByRandom a value from a slice and random selection.
