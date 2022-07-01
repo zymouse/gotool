@@ -5,21 +5,17 @@
 package str
 
 import (
-	"errors"
 	"github.com/jtyoui/gotool/f"
 	"reflect"
 	"strconv"
 )
 
 // To  string convert to f.TypeConvert type
-func To[T f.TypeConvert](data string) (value T) {
+func To[T f.TypeConvert](data string) (value T, err error) {
 	// get value type
 	valueType := reflect.TypeOf(value)
 
-	var (
-		flag any
-		err  error
-	)
+	var flag any
 
 	switch valueType.Kind() {
 	case reflect.Int:
@@ -66,14 +62,11 @@ func To[T f.TypeConvert](data string) (value T) {
 		flag, err = strconv.ParseBool(data)
 	case reflect.String:
 		flag = data
-	default:
-		err = errors.New("unsupported type")
 	}
 
-	if err != nil {
-		panic(err)
+	if err == nil {
+		value = flag.(T)
 	}
 
-	value = flag.(T)
 	return
 }

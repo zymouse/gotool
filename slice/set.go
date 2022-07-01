@@ -83,3 +83,8 @@ func In[T ~[]E, E comparable](data T, e E) (ok bool) {
 	}
 	return
 }
+
+// Contains returns true if the element is in the data.
+func Contains[T ~[]E, E comparable](data T, e E) (ok bool) {
+	return In(data, e)
+}

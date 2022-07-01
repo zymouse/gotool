@@ -13,11 +13,11 @@ import (
 func MaxLen[T ~[]E, E any](s ...T) (size int, value T) {
 	num := len(s)
 
-	if num == 0 {
+	size, value = len(s[0]), s[0]
+
+	if num == 1 {
 		return
 	}
-
-	size, value = len(s[0]), s[0]
 
 	for i := 1; i < num; i++ {
 		length := len(s[i])
@@ -35,11 +35,11 @@ func MaxLen[T ~[]E, E any](s ...T) (size int, value T) {
 func MinLen[T ~[]E, E any](s ...T) (size int, value T) {
 	num := len(s)
 
-	if num == 0 {
+	size, value = len(s[0]), s[0]
+
+	if num == 1 {
 		return
 	}
-
-	size, value = len(s[0]), s[0]
 
 	for i := 1; i < num; i++ {
 		length := len(s[i])

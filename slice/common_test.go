@@ -17,10 +17,10 @@ func TestMaxLen(t *testing.T) {
 	assert.Equal(t, size, 3)
 	assert.Equal(t, data, []any{1, 2, 3})
 
-	var i []any
-	size, data = slice.MaxLen(i)
-	assert.Equal(t, size, 0)
-	assert.Equal(t, data, []interface{}(nil))
+	var i []int
+	a, b := slice.MaxLen(i)
+	assert.Equal(t, a, 0)
+	assert.Equal(t, b, []int(nil))
 }
 
 func ExampleMaxLen() {

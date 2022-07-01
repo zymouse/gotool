@@ -140,3 +140,9 @@ func BenchmarkIn(b *testing.B) {
 		slice.In(s, rand.Int63())
 	}
 }
+
+func TestContains(t *testing.T) {
+	s := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}
+	assert.True(t, slice.Contains(s, "b"))
+	assert.False(t, slice.Contains(s, "k"))
+}
