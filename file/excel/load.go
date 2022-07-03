@@ -12,12 +12,10 @@ type Xlsx interface {
 	GetXLSXSheetName() string
 }
 
-// LoadExcel loading Excel file.
+// LoadXlsx loading Excel file.only supports loading xlsx format file.
 //
-// must be implemented by Xlsx interface.
-func LoadExcel[T Xlsx](filePath string) (t []T) {
-	if err := excel.UnmarshalXLSX(filePath, &t); err != nil {
-		panic(err)
-	}
+// must be implemented Xlsx interface.
+func LoadXlsx[T Xlsx](filePath string) (t []T, err error) {
+	err = excel.UnmarshalXLSX(filePath, &t)
 	return
 }
