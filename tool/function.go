@@ -1,7 +1,7 @@
 // Package tool
 // @Time  : 2022/6/27 16:05
 // @Email: jtyoui@qq.com
-// @Author: 张伟
+// @Author: ZhangWei
 package tool
 
 // IF  returns trueVal is cond is true, otherwise falseVal.
