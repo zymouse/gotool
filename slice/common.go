@@ -52,7 +52,7 @@ func MinLen[T ~[]E, E any](s ...T) (size int, value T) {
 	return
 }
 
-// Len count all elements number of many slice or ptr slice.
+// Len counts all elements number of many slice or ptr slice.
 func Len(data any) (size int) {
 	value := reflect.ValueOf(data)
 	typ := value.Type()
